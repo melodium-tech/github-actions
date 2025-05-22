@@ -1,0 +1,7 @@
+name: Mélodium Test Distrib
+
+on: workflow_dispatch
+
+jobs:
+    call-melodium-workflow:
+        uses: melodium-tech/github-actions/.github/workflows/melodium.yml@master
