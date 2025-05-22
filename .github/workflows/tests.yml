@@ -1,4 +1,4 @@
-name: Mélodium Test Distrib
+name: Mélodium Test
 
 on: workflow_dispatch
 
