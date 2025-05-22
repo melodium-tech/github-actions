@@ -1,0 +1,14 @@
+name: Mélodium Workflow
+
+on: workflow_call
+
+jobs:
+  melodium:
+    runs-on: ubuntu-latest
+    container:
+        image: melodium/melodium:0.9.0-pre.1
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Run Mélodium
+        run: melodium --version

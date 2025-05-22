@@ -1,0 +1,20 @@
+name: Mélodium Distribution in Github Workflow
+
+on: workflow_call
+
+jobs:
+  melodium:
+    runs-on: ubuntu-latest
+    services:
+      docker:
+        image: docker:28.0.4-dind
+        options: --privileged
+        volumes:
+          - /var/run/docker.sock:/var/run/docker.sock
+    container:
+        image: melodium/melodium:0.9.0-pre.1-alpine-docker
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Run Mélodium
+        run: melodium --version
