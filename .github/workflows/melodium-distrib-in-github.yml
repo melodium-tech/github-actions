@@ -175,6 +175,9 @@ jobs:
           submodules: ${{ inputs.submodules }}
       - name: List
         run: |
+          apk add tree
+          tree $GITHUB_WORKSPACE
+          echo ----------------------------------------------------
           echo $GITHUB_WORKSPACE
           echo ls .
           ls .
@@ -184,5 +187,7 @@ jobs:
           ls /root
           echo 'ls $GITHUB_WORKSPACE'
           ls $GITHUB_WORKSPACE
+          echo 'ls $GITHUB_WORKSPACE/melodium'
+          ls $GITHUB_WORKSPACE/melodium
       - name: Run Mélodium
         run: melodium ${{ inputs.command }}
