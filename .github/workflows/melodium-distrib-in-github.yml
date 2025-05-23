@@ -151,7 +151,7 @@ jobs:
     #       - /var/run/docker.sock:/var/run/docker.sock
     container:
         image: ${{ inputs.melodium_images_pull_source }}/melodium:${{ inputs.version }}-alpine-docker
-        options: --privileged
+        options: --privileged --net="host"
         volumes:
           - /var/run/docker.sock:/var/run/docker.sock
         env:
