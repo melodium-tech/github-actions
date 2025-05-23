@@ -176,8 +176,13 @@ jobs:
       - name: List
         run: |
           echo $GITHUB_WORKSPACE
+          echo ls .
           ls .
+          echo ls /
           ls /
+          echo ls /root
           ls /root
+          echo 'ls $GITHUB_WORKSPACE'
+          ls $GITHUB_WORKSPACE
       - name: Run Mélodium
         run: melodium ${{ inputs.command }}
