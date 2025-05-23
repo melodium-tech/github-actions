@@ -175,8 +175,9 @@ jobs:
           submodules: ${{ inputs.submodules }}
       - name: List
         run: |
-          ls .
-          ls /github/workspace
           echo $GITHUB_WORKSPACE
+          ls .
+          ls /
+          ls /root
       - name: Run Mélodium
         run: melodium ${{ inputs.command }}
