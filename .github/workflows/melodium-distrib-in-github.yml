@@ -173,5 +173,10 @@ jobs:
           show-progress: ${{ inputs.show-progress }}
           lfs: ${{ inputs.lfs }}
           submodules: ${{ inputs.submodules }}
+      - name: List
+        run: |
+          ls .
+          ls /github/workspace
+          echo $GITHUB_WORKSPACE
       - name: Run Mélodium
         run: melodium ${{ inputs.command }}
