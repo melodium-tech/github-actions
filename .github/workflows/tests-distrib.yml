@@ -8,6 +8,7 @@ jobs:
         with:
             repository: melodium-tech/melodium
             ref: 95-allow-distantengine-to-work-with-docker-podman
-            command: run /github/workspace/melodium-tech/melodium/.melodium-ci/Compo.toml --out_directory="\"/tmp/results_0\"" --key "\"\"" --ci_token "\"\"" --project "\"\"" --repository_url "\"https://gitlab.com/melodium/melodium.git\"" --ref "\"$BRANCH\""
+            path: melodium
+            command: run /github/workspace/melodium/.melodium-ci/Compo.toml --out_directory="\"/tmp/results_0\"" --key "\"\"" --ci_token "\"\"" --project "\"\"" --repository_url "\"https://gitlab.com/melodium/melodium.git\"" --ref "\"$BRANCH\""
         secrets:
             token: ${{ secrets.ACCESS_TOKEN }}
