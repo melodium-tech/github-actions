@@ -143,14 +143,15 @@ on:
 jobs:
   melodium:
     runs-on: ubuntu-latest
-    services:
-      docker:
-        image: docker:28.0.4-dind
-        options: --privileged
-        volumes:
-          - /var/run/docker.sock:/var/run/docker.sock
+    # services:
+    #   docker:
+    #     image: docker:28.0.4-dind
+    #     options: --privileged
+    #     volumes:
+    #       - /var/run/docker.sock:/var/run/docker.sock
     container:
         image: ${{ inputs.melodium_images_pull_source }}/melodium:${{ inputs.version }}-alpine-docker
+        options: --privileged
         volumes:
           - /var/run/docker.sock:/var/run/docker.sock
         env:
