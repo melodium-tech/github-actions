@@ -5,3 +5,7 @@ on: workflow_dispatch
 jobs:
     call-melodium-workflow:
         uses: melodium-tech/github-actions/.github/workflows/melodium-distrib-in-github.yml@master
+        with:
+            repository: melodium-tech/melodium
+            ref: 95-allow-distantengine-to-work-with-docker-podman
+            command: run .melodium-ci/Compo.toml --out_directory="\"/tmp/results_0\"" --key "\"\"" --ci_token "\"\"" --project "\"\"" --repository_url "\"https://gitlab.com/melodium/melodium.git\"" --ref "\"$BRANCH\""

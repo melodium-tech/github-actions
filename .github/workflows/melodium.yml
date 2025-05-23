@@ -9,6 +9,6 @@ jobs:
         image: melodium/melodium:0.9.0-pre.1-alpine
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Run Mélodium
         run: melodium --version
