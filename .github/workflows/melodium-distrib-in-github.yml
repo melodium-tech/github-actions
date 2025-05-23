@@ -176,7 +176,7 @@ jobs:
       - name: List
         run: |
           apk add tree
-          tree $GITHUB_WORKSPACE
+          tree -a $GITHUB_WORKSPACE
           echo ----------------------------------------------------
           echo $GITHUB_WORKSPACE
           echo ls .
