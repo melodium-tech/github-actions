@@ -21,29 +21,16 @@ on:
 
       repository:
         type: string
-        required: false
+        required: true
         description: '_From actions/checkout@v4_ Repository name with owner. For example, actions/checkout'
         default: ${{ github.repository }}
       ref:
         type: string
+        required: false
         description: >
           _From actions/checkout@v4_ The branch, tag or SHA to checkout. When checking out the repository that
           triggered a workflow, this defaults to the reference or SHA for that
           event.  Otherwise, uses the default branch.
-      token:
-        type: string
-        description: >
-          _From actions/checkout@v4_ Personal access token (PAT) used to fetch the repository. The PAT is configured
-          with the local git config, which enables your scripts to run authenticated git
-          commands. The post-job step removes the PAT.
-
-
-          We recommend using a service account with the least permissions necessary.
-          Also when generating a new PAT, select the least scopes necessary.
-
-
-          [Learn more about creating and using encrypted secrets](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets)
-        default: ${{ github.token }}
       ssh-key:
         type: string
         description: >
@@ -137,6 +124,20 @@ on:
         type: boolean
         description: _From actions/checkout@v4_ The base URL for the GitHub instance that you are trying to clone from, will use environment defaults to fetch from the same instance that the workflow is running from unless specified. Example URLs are https://github.com or https://my-ghes-server.example.com
         required: false
+    secrets:
+      token:
+        required: true
+        description: >
+          _From actions/checkout@v4_ Personal access token (PAT) used to fetch the repository. The PAT is configured
+          with the local git config, which enables your scripts to run authenticated git
+          commands. The post-job step removes the PAT.
+
+
+          We recommend using a service account with the least permissions necessary.
+          Also when generating a new PAT, select the least scopes necessary.
+
+
+          [Learn more about creating and using encrypted secrets](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets)
     
 
 jobs:
@@ -156,7 +157,7 @@ jobs:
         with:
           repository: ${{ inputs.repository }}
           ref: ${{ inputs.ref }}
-          token: ${{ inputs.token }}
+          token: ${{ secrets.token }}
           ssh-key: ${{ inputs.ssh-key }}
           ssh-known-hosts: ${{ inputs.ssh-known-hosts }}
           ssh-strict: ${{ inputs.ssh-strict }}
