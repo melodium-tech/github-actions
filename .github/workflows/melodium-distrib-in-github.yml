@@ -151,6 +151,8 @@ jobs:
           - /var/run/docker.sock:/var/run/docker.sock
     container:
         image: ${{ inputs.melodium_images_pull_source }}/melodium:${{ inputs.version }}-alpine-docker
+        volumes:
+          - /var/run/docker.sock:/var/run/docker.sock
         env:
           MELODIUM_COMPOSE_DEBUG: true
     steps:
