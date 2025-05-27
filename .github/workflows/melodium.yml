@@ -149,6 +149,8 @@ jobs:
     runs-on: ubuntu-latest
     container:
         image: ${{ inputs.melodium_images_pull_source }}/melodium:${{ inputs.version }}-${{ inputs.edition }}
+        env:
+          MELODIUM_IMAGES_PULL_SOURCE: ${{ inputs.melodium_images_pull_source }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4

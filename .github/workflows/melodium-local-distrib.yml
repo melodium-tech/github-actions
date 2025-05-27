@@ -150,6 +150,7 @@ jobs:
           - /var/run/docker.sock:/var/run/docker.sock
         env:
           MELODIUM_COMPOSE_DEBUG: true
+          MELODIUM_IMAGES_PULL_SOURCE: ${{ inputs.melodium_images_pull_source }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
