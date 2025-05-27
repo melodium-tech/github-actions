@@ -7,8 +7,8 @@ jobs:
         uses: melodium-tech/github-actions/.github/workflows/melodium.yml@master
         with:
             repository: melodium-tech/melodium
-            ref: main
+            ref: master
             path: melodium
-            command: run $GITHUB_WORKSPACE/melodium/.melodium/Compo.toml --out_directory="\"/tmp/results_0\"" --key "\"\"" --ci_token "\"\"" --project "\"\"" --repository_url "\"https://gitlab.com/melodium/melodium.git\"" --ref "\"main\""
+            command: run $GITHUB_WORKSPACE/melodium/.melodium/Compo.toml --out_directory="\"/tmp/results_0\"" --key "\"\"" --ci_token "\"\"" --project "\"\"" --repository_url "\"https://gitlab.com/melodium/melodium.git\"" --ref "\"master\""
         secrets:
             token: ${{ secrets.ACCESS_TOKEN }}
