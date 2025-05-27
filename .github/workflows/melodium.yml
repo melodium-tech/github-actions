@@ -21,7 +21,7 @@ on:
       edition:
         type: string
         required: false
-        default: scratch
+        default: alpine
         description: 'The Mélodium edition to use'
 
       repository:
