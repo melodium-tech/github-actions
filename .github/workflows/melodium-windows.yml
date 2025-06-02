@@ -1,4 +1,4 @@
-name: Mélodium Workflow with Local Distribution
+name: Mélodium on Windows Workflow
 
 on:
   workflow_call:
@@ -8,16 +8,16 @@ on:
         required: false
         default: run .melodium-ci/Compo.toml
         description: 'The Mélodium command to run'
-      melodium_images_pull_source:
-        type: string
-        required: false
-        default: 'melodium'
-        description: 'Source to use for Mélodium container images'
       version:
         type: string
         required: false
         default: 0.9.0-pre.2
         description: 'The Mélodium version to use (should usually be the same as the workflow)'
+      edition:
+        type: string
+        required: false
+        default: alpine
+        description: 'The Mélodium edition to use'
 
       repository:
         type: string
@@ -124,8 +124,7 @@ on:
         type: boolean
         description: _From actions/checkout@v4_ The base URL for the GitHub instance that you are trying to clone from, will use environment defaults to fetch from the same instance that the workflow is running from unless specified. Example URLs are https://github.com or https://my-ghes-server.example.com
         required: false
-    
-
+      
       artifact-name:
         type: string
         description: '_From actions/upload-artifact@v4_ Artifact name'
@@ -134,7 +133,8 @@ on:
       artifact-path:
         type: string
         description: '_From actions/upload-artifact@v4_ A file, directory or wildcard pattern that describes what to upload'
-        required: true
+        required: false
+        default: ''
       artifact-if-no-files-found:
         type: string
         description: >
@@ -193,20 +193,15 @@ on:
 
           [Learn more about creating and using encrypted secrets](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets)
     
-
 jobs:
   melodium:
-    runs-on: ubuntu-latest
-    container:
-        image: ${{ inputs.melodium_images_pull_source }}/melodium:${{ inputs.version }}-alpine-docker
-        options: --privileged --add-host=docker:host-gateway
-        volumes:
-          - /var/run/docker.sock:/var/run/docker.sock
-        env:
-          MELODIUM_COMPOSE_DEBUG: true
-          MELODIUM_IMAGES_PULL_SOURCE: ${{ inputs.melodium_images_pull_source }}
+    runs-on: windows-latest
     steps:
-      - name: Checkout code
+      - name: Setup Mélodium
+        run: |
+          Invoke-WebRequest  -Uri "https://repo.melodium.tech/install/${{ inputs.version }}/melodium-${{ inputs.version }}_x86_64-pc-windows-gnu.msi" -UseBasicParsing -OutFile 'c:\windows\temp\melodium.msi'
+          Start-Process msiexec.exe -Wait -ArgumentList '/I c:\windows\temp\melodium.msi /quiet'
+      - name: Checkout
         uses: actions/checkout@v4
         with:
           repository: ${{ inputs.repository }}
