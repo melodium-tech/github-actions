@@ -20,6 +20,7 @@ jobs:
             ref: master
             path: melodium
             command: --version
+            artifact-path: ''
         secrets:
             token: ${{ secrets.ACCESS_TOKEN }}
     call-melodium-windows:
@@ -30,5 +31,6 @@ jobs:
             ref: master
             path: melodium
             command: --version
+            artifact-path: ''
         secrets:
             token: ${{ secrets.ACCESS_TOKEN }}
