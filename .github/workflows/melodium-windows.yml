@@ -133,7 +133,7 @@ on:
       artifact-path:
         type: string
         description: '_From actions/upload-artifact@v4_ A file, directory or wildcard pattern that describes what to upload'
-        required: false
+        required: true
         default: ''
       artifact-if-no-files-found:
         type: string
@@ -201,6 +201,7 @@ jobs:
         run: |
           Invoke-WebRequest  -Uri "https://repo.melodium.tech/install/${{ inputs.version }}/melodium-${{ inputs.version }}_x86_64-pc-windows-gnu.msi" -UseBasicParsing -OutFile 'c:\windows\temp\melodium.msi'
           Start-Process msiexec.exe -Wait -ArgumentList '/I c:\windows\temp\melodium.msi /quiet'
+          $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User") 
       - name: Checkout
         uses: actions/checkout@v4
         with:
