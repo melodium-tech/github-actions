@@ -201,7 +201,6 @@ jobs:
         run: |
           Invoke-WebRequest  -Uri "https://repo.melodium.tech/install/${{ inputs.version }}/melodium-${{ inputs.version }}_x86_64-pc-windows-gnu.msi" -UseBasicParsing -OutFile 'c:\windows\temp\melodium.msi'
           Start-Process msiexec.exe -Wait -ArgumentList '/I c:\windows\temp\melodium.msi /quiet'
-          $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User") 
       - name: Checkout
         uses: actions/checkout@v4
         with:
@@ -224,7 +223,9 @@ jobs:
           lfs: ${{ inputs.lfs }}
           submodules: ${{ inputs.submodules }}
       - name: Run Mélodium
-        run: melodium ${{ inputs.command }}
+        run: |
+          $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+          melodium ${{ inputs.command }}
       - name: Artifacts
         uses: actions/upload-artifact@v4
         with:
