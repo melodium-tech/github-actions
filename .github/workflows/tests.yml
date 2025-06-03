@@ -3,12 +3,30 @@ name: Mélodium Test
 on: workflow_dispatch
 
 jobs:
-    call-melodium-workflow:
-        uses: melodium-tech/github-actions/.github/workflows/melodium.yml@master
+    # call-melodium-workflow:
+    #     uses: melodium-tech/github-actions/.github/workflows/melodium.yml@master
+    #     with:
+    #         repository: melodium-tech/melodium
+    #         ref: master
+    #         path: melodium
+    #         command: run $GITHUB_WORKSPACE/melodium/.melodium/Compo.toml --out_directory="\"/tmp/results_0\"" --key "\"\"" --ci_token "\"\"" --project "\"\"" --repository_url "\"https://gitlab.com/melodium/melodium.git\"" --ref "\"master\""
+    #     secrets:
+    #         token: ${{ secrets.ACCESS_TOKEN }}
+    call-melodium-macos:
+        uses: melodium-tech/github-actions/.github/workflows/melodium-macos.yml@master
         with:
             repository: melodium-tech/melodium
             ref: master
             path: melodium
-            command: run $GITHUB_WORKSPACE/melodium/.melodium/Compo.toml --out_directory="\"/tmp/results_0\"" --key "\"\"" --ci_token "\"\"" --project "\"\"" --repository_url "\"https://gitlab.com/melodium/melodium.git\"" --ref "\"master\""
+            command: --version
+        secrets:
+            token: ${{ secrets.ACCESS_TOKEN }}
+    call-melodium-windows:
+        uses: melodium-tech/github-actions/.github/workflows/melodium-windows.yml@master
+        with:
+            repository: melodium-tech/melodium
+            ref: master
+            path: melodium
+            command: --version
         secrets:
             token: ${{ secrets.ACCESS_TOKEN }}
