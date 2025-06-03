@@ -96,7 +96,7 @@ There are some optional inputs, please refer to the workflow file itself to see 
 | Input      | Default value    | Description |
 |------------|------------------|-------------|
 | `version`  | `0.9.0-pre.2`    | The Mélodium version to use (should usually be the same as the component). |
-| `edition`  | `alpine`         | The Mélodium edition to use (_not available when local distribution is chosen_). |
+| `edition`  | `alpine`         | The Mélodium edition to use (_available only for pure Mélodium `melodium.yml`_). |
 | `command`  | `run Compo.toml` | The Mélodium command to run. |
 | `repository`  | `${{ github.repository }}` | Repository name with owner. For example, actions/checkout' |
 | `ref`  | _default branch_ | The branch, tag or SHA to checkout. |
