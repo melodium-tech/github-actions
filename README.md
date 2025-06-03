@@ -9,13 +9,37 @@ This project contains reusable workflows to use Mélodium in Github Actions.
 
 Use this workflow to run Mélodium in Github Action.
 
-To add this component to your CI/CD pipeline, add the following include entry to your
-project's CI/CD configuration:
+To add this workflow to your CI/CD pipeline, add the following include entry to your
+project CI/CD configuration:
 
 ```yaml
-uses: melodium-tech/github-actions/.github/workflows/melodium.yml@<tag>
+jobs:
+  melodium:
+    uses: melodium-tech/github-actions/.github/workflows/melodium.yml@<tag>
+      with:
+        command: run .melodium-ci/Compo.toml
+        artifact-path: 'logs/'
+      secrets:
+        token: ${{ secrets.token }}
+```
+
+Where `<tag>` is the release tag you want to use (usually Mélodium version itself, e.g. `v0.9.0-pre.2`).  
+Refer to the workflow file itself to see all available inputs about checkout and artifacts.
+
+### Mélodium in Github with local distribution
+
+Use this workflow to run Mélodium in Github Actions with local distribution available.
+
+To add this workflow to your CI/CD pipeline, add the following include entry to your
+project CI/CD configuration:
+
+```yaml
+jobs:
+  melodium:
+    uses: melodium-tech/github-actions/.github/workflows/melodium-local-distrib.yml@<tag>
     with:
       command: run .melodium-ci/Compo.toml
+      artifact-path: 'logs/'
     secrets:
       token: ${{ secrets.token }}
 ```
@@ -23,17 +47,41 @@ uses: melodium-tech/github-actions/.github/workflows/melodium.yml@<tag>
 Where `<tag>` is the release tag you want to use (usually Mélodium version itself, e.g. `v0.9.0-pre.2`).  
 Refer to the workflow file itself to see all available inputs about checkout and artifacts.
 
-### Mélodium in GitLab with local distribution
+### Mélodium in Github on Windows
 
-Use this component to run Mélodium in GitLab CI with local distribution available.
+Use this workflow to run Mélodium in Github Actions on Windows.
 
-To add this component to your CI/CD pipeline, add the following include entry to your
-project's CI/CD configuration:
+To add this workflow to your CI/CD pipeline, add the following include entry to your
+project CI/CD configuration:
 
 ```yaml
-uses: melodium-tech/github-actions/.github/workflows/melodium-local-distrib.yml@<tag>
+jobs:
+  melodium:
+    uses: melodium-tech/github-actions/.github/workflows/melodium-windows.yml@<tag>
     with:
       command: run .melodium-ci/Compo.toml
+      artifact-path: 'logs/'
+    secrets:
+      token: ${{ secrets.token }}
+```
+
+Where `<tag>` is the release tag you want to use (usually Mélodium version itself, e.g. `v0.9.0-pre.2`).  
+Refer to the workflow file itself to see all available inputs about checkout and artifacts.
+
+### Mélodium in Github on Mac OS
+
+Use this workflow to run Mélodium in Github Actions on Mac OS.
+
+To add this workflow to your CI/CD pipeline, add the following include entry to your
+project CI/CD configuration:
+
+```yaml
+jobs:
+  melodium:
+    uses: melodium-tech/github-actions/.github/workflows/melodium-macos.yml@<tag>
+    with:
+      command: run .melodium-ci/Compo.toml
+      artifact-path: 'logs/'
     secrets:
       token: ${{ secrets.token }}
 ```
