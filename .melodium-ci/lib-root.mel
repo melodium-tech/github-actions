@@ -47,7 +47,11 @@ treatment main(const api_token: string, const work_location: string = "api", out
         "sh -c \"cd project/ ; ls -l --almost-all | tee files-list.txt\"",
         "mv project/files-list.txt /mnt/data/"
       ]),
-      out_file="files-list.txt"
+      out_file="files-list.txt",
+      github=on_github,
+      github_token=ci_service_token,
+      github_project=ci_service_project,
+      github_sha=ci_service_sha
     )
     
     test: simpleStepWithInput[dispatcher=cicd, logger=logger](
@@ -57,7 +61,11 @@ treatment main(const api_token: string, const work_location: string = "api", out
       commands=[
         |command("test", ["-s", "/mnt/data/list.txt"]),
         |command("cat", ["/mnt/data/list.txt"])
-      ]
+      ],
+      github=on_github,
+      github_token=ci_service_token,
+      github_project=ci_service_project,
+      github_sha=ci_service_sha
     )
 
     startup.trigger -> build.trigger,data -> test.data
