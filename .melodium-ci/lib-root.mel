@@ -51,7 +51,8 @@ treatment main(const api_token: string, const work_location: string = "api", out
       github=on_github,
       github_token=ci_service_token,
       github_project=ci_service_project,
-      github_sha=ci_service_sha
+      github_sha=ci_service_sha,
+      log_service_response=true
     )
     
     test: simpleStepWithInput[dispatcher=cicd, logger=logger](
@@ -65,7 +66,8 @@ treatment main(const api_token: string, const work_location: string = "api", out
       github=on_github,
       github_token=ci_service_token,
       github_project=ci_service_project,
-      github_sha=ci_service_sha
+      github_sha=ci_service_sha,
+      log_service_response=true
     )
 
     startup.trigger -> build.trigger,data -> test.data
