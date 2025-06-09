@@ -10,6 +10,7 @@ jobs:
             artifact-path: 'logs'
             command: run .melodium-ci/Compo.toml --api_token "\"${{ secrets.MELODIUM_API_JOB_TOKEN }}\"" --output_directory '"logs"' --repository_clone_url "\"https://github.com/rustls/rustls.git\"" --repository_clone_ref "\"main\""
         secrets:
+            inherit: true
             token: ${{ secrets.ACCESS_TOKEN }}
             MELODIUM_API_JOB_TOKEN: ${{ secrets.MELODIUM_API_JOB_TOKEN }}
     call-melodium-compose:
@@ -19,6 +20,7 @@ jobs:
             artifact-path: 'logs'
             command: run .melodium-ci/Compo.toml --work_location '"compose"' --api_token "\"${{ secrets.MELODIUM_API_JOB_TOKEN }}\"" --output_directory '"logs"' --repository_clone_url "\"https://github.com/rustls/rustls.git\"" --repository_clone_ref "\"main\""
         secrets:
+            inherit: true
             token: ${{ secrets.ACCESS_TOKEN }}
             MELODIUM_API_JOB_TOKEN: ${{ secrets.MELODIUM_API_JOB_TOKEN }}
     call-melodium-macos:
@@ -28,6 +30,7 @@ jobs:
             artifact-path: 'logs'
             command: run .melodium-ci/Compo.toml --api_token "\"${{ secrets.MELODIUM_API_JOB_TOKEN }}\"" --output_directory '"logs"' --repository_clone_url "\"https://github.com/rustls/rustls.git\"" --repository_clone_ref "\"main\""
         secrets:
+            inherit: true
             token: ${{ secrets.ACCESS_TOKEN }}
             MELODIUM_API_JOB_TOKEN: ${{ secrets.MELODIUM_API_JOB_TOKEN }}
     call-melodium-windows:
@@ -37,5 +40,6 @@ jobs:
             artifact-path: 'logs'
             command: run .melodium-ci/Compo.toml --api_token "\"${{ secrets.MELODIUM_API_JOB_TOKEN }}\"" --output_directory '"logs"' --repository_clone_url "\"https://github.com/rustls/rustls.git\"" --repository_clone_ref "\"main\""
         secrets:
+            inherit: true
             token: ${{ secrets.ACCESS_TOKEN }}
             MELODIUM_API_JOB_TOKEN: ${{ secrets.MELODIUM_API_JOB_TOKEN }}
