@@ -16,7 +16,7 @@ on:
 
       repository:
         type: string
-        required: true
+        required: false
         description: '_From actions/checkout@v4_ Repository name with owner. For example, actions/checkout'
         default: ${{ github.repository }}
       ref:
