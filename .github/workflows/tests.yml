@@ -3,34 +3,35 @@ name: Mélodium Test
 on: workflow_dispatch
 
 jobs:
-    # call-melodium-workflow:
-    #     uses: melodium-tech/github-actions/.github/workflows/melodium.yml@master
-    #     with:
-    #         repository: melodium-tech/melodium
-    #         ref: master
-    #         path: melodium
-    #         command: run $GITHUB_WORKSPACE/melodium/.melodium/Compo.toml --out_directory="\"/tmp/results_0\"" --key "\"\"" --ci_token "\"\"" --project "\"\"" --repository_url "\"https://gitlab.com/melodium/melodium.git\"" --ref "\"master\""
-    #     secrets:
-    #         token: ${{ secrets.ACCESS_TOKEN }}
+    call-melodium:
+        uses: melodium-tech/github-actions/.github/workflows/melodium.yml@master
+        with:
+            version: 0.9.0-pre.2
+            artifact-path: 'logs'
+            command: run .melodium-ci/Compo.toml --api_token "\"${{ secrets.MELODIUM_API_JOB_TOKEN }}\"" --output_directory '"logs"' --repository_clone_url "\"https://github.com/rustls/rustls.git\"" --repository_clone_ref "\"main\""
+        secrets:
+            token: ${{ secrets.ACCESS_TOKEN }}
+    call-melodium-compose:
+        uses: melodium-tech/github-actions/.github/workflows/melodium-local-distrib.yml@master
+        with:
+            version: 0.9.0-pre.2
+            artifact-path: 'logs'
+            command: run .melodium-ci/Compo.toml --work_location '"compose"' --api_token "\"${{ secrets.MELODIUM_API_JOB_TOKEN }}\"" --output_directory '"logs"' --repository_clone_url "\"https://github.com/rustls/rustls.git\"" --repository_clone_ref "\"main\""
+        secrets:
+            token: ${{ secrets.ACCESS_TOKEN }}
     call-melodium-macos:
         uses: melodium-tech/github-actions/.github/workflows/melodium-macos.yml@master
         with:
-            version: 0.9.0-pre.1
-            repository: melodium-tech/melodium
-            ref: master
-            path: melodium
-            command: --version
-            artifact-path: 'truc'
+            version: 0.9.0-pre.2
+            artifact-path: 'logs'
+            command: run .melodium-ci/Compo.toml --api_token "\"${{ secrets.MELODIUM_API_JOB_TOKEN }}\"" --output_directory '"logs"' --repository_clone_url "\"https://github.com/rustls/rustls.git\"" --repository_clone_ref "\"main\""
         secrets:
             token: ${{ secrets.ACCESS_TOKEN }}
     call-melodium-windows:
         uses: melodium-tech/github-actions/.github/workflows/melodium-windows.yml@master
         with:
-            version: 0.9.0-pre.1
-            repository: melodium-tech/melodium
-            ref: master
-            path: melodium
-            command: --version
-            artifact-path: 'truc'
+            version: 0.9.0-pre.2
+            artifact-path: 'logs'
+            command: run .melodium-ci/Compo.toml --api_token "\"${{ secrets.MELODIUM_API_JOB_TOKEN }}\"" --output_directory '"logs"' --repository_clone_url "\"https://github.com/rustls/rustls.git\"" --repository_clone_ref "\"main\""
         secrets:
             token: ${{ secrets.ACCESS_TOKEN }}
