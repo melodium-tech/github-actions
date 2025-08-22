@@ -223,6 +223,8 @@ jobs:
           submodules: ${{ inputs.submodules }}
       - name: Run Mélodium
         run: melodium ${{ inputs.command }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.token }}
       - name: Artifacts
         uses: actions/upload-artifact@v4
         with:
