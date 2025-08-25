@@ -11,7 +11,7 @@ on:
       version:
         type: string
         required: false
-        default: 0.9.0-pre.2
+        default: 0.9.0-pre.5
         description: 'The Mélodium version to use (should usually be the same as the workflow)'
 
       repository:
@@ -193,13 +193,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Setup Mélodium
-        #run: |
-        #  curl --silent --show-error --output /tmp/melodium.sh "https://repo.melodium.tech/install/${{ inputs.version }}/melodium-${{ inputs.version }}_x86_64-unknown-linux-gnu.sh"
-        #  chmod +x /tmp/melodium.sh
-        #  sudo /tmp/melodium.sh
         run: |
-          sudo curl --silent --show-error --output /usr/local/bin/melodium "https://testing.melodium.tech/hidden/melodium"
-          sudo chmod +x /usr/local/bin/melodium
+          curl --silent --show-error --output /tmp/melodium.sh "https://repo.melodium.tech/install/${{ inputs.version }}/melodium-${{ inputs.version }}_x86_64-unknown-linux-gnu.sh"
+          chmod +x /tmp/melodium.sh
+          sudo /tmp/melodium.sh
       - name: Checkout
         uses: actions/checkout@v4
         with:

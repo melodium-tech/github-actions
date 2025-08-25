@@ -16,7 +16,7 @@ on:
       version:
         type: string
         required: false
-        default: 0.9.0-pre.2
+        default: 0.9.0-pre.5
         description: 'The Mélodium version to use (should usually be the same as the workflow)'
 
       repository:
@@ -203,6 +203,7 @@ jobs:
         volumes:
           - /var/run/docker.sock:/var/run/docker.sock
         env:
+          GITHUB_TOKEN: ${{ secrets.token }}
           MELODIUM_IMAGES_PULL_SOURCE: ${{ inputs.melodium_images_pull_source }}
     steps:
       - name: Checkout code
