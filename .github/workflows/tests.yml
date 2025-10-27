@@ -6,7 +6,7 @@ jobs:
     call-melodium:
         uses: melodium-tech/github-actions/.github/workflows/melodium.yml@master
         with:
-            version: 0.9.0-pre.2
+            version: 0.9.1
             artifact-path: 'logs'
             command: run .melodium-ci/Compo.toml --api_token "\"${{ vars.SECRET_MELODIUM_API_JOB_TOKEN }}\"" --output_directory '"logs"' --repository_clone_url "\"https://github.com/rustls/rustls.git\"" --repository_clone_ref "\"main\""
         secrets:
@@ -14,7 +14,7 @@ jobs:
     call-melodium-compose:
         uses: melodium-tech/github-actions/.github/workflows/melodium-local-distrib.yml@master
         with:
-            version: 0.9.0-pre.2
+            version: 0.9.1
             artifact-path: 'logs'
             command: run .melodium-ci/Compo.toml --work_location '"compose"' --api_token "\"${{ vars.SECRET_MELODIUM_API_JOB_TOKEN }}\"" --output_directory '"logs"' --repository_clone_url "\"https://github.com/rustls/rustls.git\"" --repository_clone_ref "\"main\"" --on_github 'true' --ci_service_token "\"${{ github.token }}\"" --ci_service_project "\"${{ github.repository }}\"" --ci_service_sha "\"${{ github.sha }}\""
         secrets:
@@ -22,7 +22,7 @@ jobs:
     call-melodium-macos:
         uses: melodium-tech/github-actions/.github/workflows/melodium-macos.yml@master
         with:
-            version: 0.9.0-pre.2
+            version: 0.9.1
             artifact-path: 'logs'
             command: run .melodium-ci/Compo.toml --api_token "\"${{ vars.SECRET_MELODIUM_API_JOB_TOKEN }}\"" --output_directory '"logs"' --repository_clone_url "\"https://github.com/rustls/rustls.git\"" --repository_clone_ref "\"main\"" --on_github 'true' --ci_service_token "\"${{ github.token }}\"" --ci_service_project "\"${{ github.repository }}\"" --ci_service_sha "\"${{ github.sha }}\""
         secrets:
@@ -30,7 +30,7 @@ jobs:
     call-melodium-windows:
         uses: melodium-tech/github-actions/.github/workflows/melodium-windows.yml@master
         with:
-            version: 0.9.0-pre.2
+            version: 0.9.1
             artifact-path: 'logs'
             command: run .melodium-ci/Compo.toml --api_token "\"${{ vars.SECRET_MELODIUM_API_JOB_TOKEN }}\"" --output_directory '"logs"' --repository_clone_url "\"https://github.com/rustls/rustls.git\"" --repository_clone_ref "\"main\"" --on_github 'true' --ci_service_token "\"${{ github.token }}\"" --ci_service_project "\"${{ github.repository }}\"" --ci_service_sha "\"${{ github.sha }}\""
         secrets:
@@ -38,7 +38,7 @@ jobs:
     call-melodium-advanced:
         uses: melodium-tech/github-actions/.github/workflows/melodium.yml@master
         with:
-            version: 0.9.0-pre.2
+            version: 0.9.1
             artifact-path: 'logs'
             command: run .melodium-ci/Compo.toml advanced --api_token "\"${{ vars.SECRET_MELODIUM_API_JOB_TOKEN }}\"" --output_directory '"logs"' --repository_clone_url "\"https://github.com/rustls/rustls.git\"" --repository_clone_ref "\"main\"" --on_github 'true' --ci_service_token "\"${{ github.token }}\"" --ci_service_project "\"${{ github.repository }}\"" --ci_service_sha "\"${{ github.sha }}\""
         secrets:
@@ -46,7 +46,7 @@ jobs:
     call-melodium-compose-advanced:
         uses: melodium-tech/github-actions/.github/workflows/melodium-local-distrib.yml@master
         with:
-            version: 0.9.0-pre.2
+            version: 0.9.1
             artifact-path: 'logs'
             command: run .melodium-ci/Compo.toml advanced --work_location '"compose"' --api_token "\"${{ vars.SECRET_MELODIUM_API_JOB_TOKEN }}\"" --output_directory '"logs"' --repository_clone_url "\"https://github.com/rustls/rustls.git\"" --repository_clone_ref "\"main\"" --on_github 'true' --ci_service_token "\"${{ github.token }}\"" --ci_service_project "\"${{ github.repository }}\"" --ci_service_sha "\"${{ github.sha }}\""
         secrets:
@@ -54,7 +54,7 @@ jobs:
     call-melodium-macos-advanced:
         uses: melodium-tech/github-actions/.github/workflows/melodium-macos.yml@master
         with:
-            version: 0.9.0-pre.2
+            version: 0.9.1
             artifact-path: 'logs'
             command: run .melodium-ci/Compo.toml advanced --api_token "\"${{ vars.SECRET_MELODIUM_API_JOB_TOKEN }}\"" --output_directory '"logs"' --repository_clone_url "\"https://github.com/rustls/rustls.git\"" --repository_clone_ref "\"main\"" --on_github 'true' --ci_service_token "\"${{ github.token }}\"" --ci_service_project "\"${{ github.repository }}\"" --ci_service_sha "\"${{ github.sha }}\""
         secrets:
@@ -62,7 +62,7 @@ jobs:
     call-melodium-windows-advanced:
         uses: melodium-tech/github-actions/.github/workflows/melodium-windows.yml@master
         with:
-            version: 0.9.0-pre.2
+            version: 0.9.1
             artifact-path: 'logs'
             command: run .melodium-ci/Compo.toml advanced --api_token "\"${{ vars.SECRET_MELODIUM_API_JOB_TOKEN }}\"" --output_directory '"logs"' --repository_clone_url "\"https://github.com/rustls/rustls.git\"" --repository_clone_ref "\"main\"" --on_github 'true' --ci_service_token "\"${{ github.token }}\"" --ci_service_project "\"${{ github.repository }}\"" --ci_service_sha "\"${{ github.sha }}\""
         secrets:
