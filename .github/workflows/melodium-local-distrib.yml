@@ -179,7 +179,7 @@ on:
         default: false
 
     secrets:
-      token:
+      github-token:
         required: true
         description: >
           _From actions/checkout@v4_ Personal access token (PAT) used to fetch the repository. The PAT is configured
@@ -192,6 +192,30 @@ on:
 
 
           [Learn more about creating and using encrypted secrets](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets)
+      melodium-token:
+        required: false
+        description: >
+          Mélodium API Token
+      secret-1:
+        required: false
+      secret-2:
+        required: false
+      secret-3:
+        required: false
+      secret-4:
+        required: false
+      secret-5:
+        required: false
+      secret-6:
+        required: false
+      secret-7:
+        required: false
+      secret-8:
+        required: false
+      secret-9:
+        required: false
+      secret-10:
+        required: false
     
 
 jobs:
@@ -203,15 +227,26 @@ jobs:
         volumes:
           - /var/run/docker.sock:/var/run/docker.sock
         env:
-          GITHUB_TOKEN: ${{ secrets.token }}
+          GITHUB_TOKEN: ${{ secrets.github-token }}
+          MELODIUM_TOKEN: ${{ secrets.melodium-token }}
           MELODIUM_IMAGES_PULL_SOURCE: ${{ inputs.melodium_images_pull_source }}
+          SECRET_1: ${{ secrets.secret-1 }}
+          SECRET_2: ${{ secrets.secret-2 }}
+          SECRET_3: ${{ secrets.secret-3 }}
+          SECRET_4: ${{ secrets.secret-4 }}
+          SECRET_5: ${{ secrets.secret-5 }}
+          SECRET_6: ${{ secrets.secret-6 }}
+          SECRET_7: ${{ secrets.secret-7 }}
+          SECRET_8: ${{ secrets.secret-8 }}
+          SECRET_9: ${{ secrets.secret-9 }}
+          SECRET_10: ${{ secrets.secret-10 }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           repository: ${{ inputs.repository }}
           ref: ${{ inputs.ref }}
-          token: ${{ secrets.token }}
+          token: ${{ secrets.github-token }}
           ssh-key: ${{ inputs.ssh-key }}
           ssh-known-hosts: ${{ inputs.ssh-known-hosts }}
           ssh-strict: ${{ inputs.ssh-strict }}
