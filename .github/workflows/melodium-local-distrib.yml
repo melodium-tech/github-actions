@@ -6,7 +6,7 @@ on:
       command:
         type: string
         required: false
-        default: run .melodium-ci/Compo.toml
+        default: run --api-report .melodium-ci/Compo.toml
         description: 'The Mélodium command to run'
       melodium_images_pull_source:
         type: string
@@ -16,7 +16,7 @@ on:
       version:
         type: string
         required: false
-        default: 0.9.2
+        default: 0.10.0
         description: 'The Mélodium version to use (should usually be the same as the workflow)'
 
       repository:
@@ -192,7 +192,7 @@ on:
 
 
           [Learn more about creating and using encrypted secrets](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets)
-      melodium-token:
+      melodium-api-token:
         required: false
         description: >
           Mélodium API Token
@@ -228,7 +228,7 @@ jobs:
           - /var/run/docker.sock:/var/run/docker.sock
         env:
           GITHUB_TOKEN: ${{ secrets.github-token }}
-          MELODIUM_TOKEN: ${{ secrets.melodium-token }}
+          MELODIUM_API_TOKEN: ${{ secrets.melodium-api-token }}
           MELODIUM_IMAGES_PULL_SOURCE: ${{ inputs.melodium_images_pull_source }}
           SECRET_1: ${{ secrets.secret-1 }}
           SECRET_2: ${{ secrets.secret-2 }}
