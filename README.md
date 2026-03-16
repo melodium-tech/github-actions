@@ -17,10 +17,11 @@ jobs:
   melodium:
     uses: melodium-tech/github-actions/.github/workflows/melodium.yml@<tag>
       with:
-        command: run .melodium-ci/Compo.toml
+        command: run --api-report .melodium-ci/Compo.toml
         artifact-path: 'logs/'
       secrets:
-        token: ${{ secrets.token }}
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        melodium-api-token: ${{ secrets.MELODIUM_API_TOKEN }}
 ```
 
 Where `<tag>` is the release tag you want to use (usually Mélodium version itself, e.g. `v0.10.0`).  
@@ -38,10 +39,11 @@ jobs:
   melodium:
     uses: melodium-tech/github-actions/.github/workflows/melodium-local-distrib.yml@<tag>
     with:
-      command: run .melodium-ci/Compo.toml
+      command: run --api-report .melodium-ci/Compo.toml
       artifact-path: 'logs/'
     secrets:
-      token: ${{ secrets.token }}
+      github-token: ${{ secrets.GITHUB_TOKEN }}
+      melodium-api-token: ${{ secrets.MELODIUM_API_TOKEN }}
 ```
 
 Where `<tag>` is the release tag you want to use (usually Mélodium version itself, e.g. `v0.10.0`).  
@@ -59,10 +61,11 @@ jobs:
   melodium:
     uses: melodium-tech/github-actions/.github/workflows/melodium-ubuntu.yml@<tag>
     with:
-      command: run .melodium-ci/Compo.toml
+      command: run --api-report .melodium-ci/Compo.toml
       artifact-path: 'logs/'
     secrets:
-      token: ${{ secrets.token }}
+      github-token: ${{ secrets.GITHUB_TOKEN }}
+      melodium-api-token: ${{ secrets.MELODIUM_API_TOKEN }}
 ```
 
 Where `<tag>` is the release tag you want to use (usually Mélodium version itself, e.g. `v0.10.0`).  
@@ -81,10 +84,11 @@ jobs:
   melodium:
     uses: melodium-tech/github-actions/.github/workflows/melodium-windows.yml@<tag>
     with:
-      command: run .melodium-ci/Compo.toml
+      command: run --api-report .melodium-ci/Compo.toml
       artifact-path: 'logs/'
     secrets:
-      token: ${{ secrets.token }}
+      github-token: ${{ secrets.GITHUB_TOKEN }}
+      melodium-api-token: ${{ secrets.MELODIUM_API_TOKEN }}
 ```
 
 Where `<tag>` is the release tag you want to use (usually Mélodium version itself, e.g. `v0.10.0`).  
@@ -102,10 +106,11 @@ jobs:
   melodium:
     uses: melodium-tech/github-actions/.github/workflows/melodium-macos.yml@<tag>
     with:
-      command: run .melodium-ci/Compo.toml
+      command: run --api-report .melodium-ci/Compo.toml
       artifact-path: 'logs/'
     secrets:
-      token: ${{ secrets.token }}
+      github-token: ${{ secrets.GITHUB_TOKEN }}
+      melodium-api-token: ${{ secrets.MELODIUM_API_TOKEN }}
 ```
 
 Where `<tag>` is the release tag you want to use (usually Mélodium version itself, e.g. `v0.10.0`).  

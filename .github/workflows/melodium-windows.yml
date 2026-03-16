@@ -18,6 +18,10 @@ on:
         required: false
         default: alpine
         description: 'The Mélodium edition to use'
+      melodium_group_id:
+        type: string
+        required: false
+        description: 'Group identifier (UUID) the run is part of'
 
       repository:
         type: string
@@ -253,6 +257,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.token }}
           MELODIUM_API_TOKEN: ${{ secrets.melodium-api-token }}
+          MELODIUM_GROUP_ID: ${{ inputs.melodium_group_id }}
           SECRET_1: ${{ secrets.secret-1 }}
           SECRET_2: ${{ secrets.secret-2 }}
           SECRET_3: ${{ secrets.secret-3 }}
