@@ -23,7 +23,7 @@ jobs:
         token: ${{ secrets.token }}
 ```
 
-Where `<tag>` is the release tag you want to use (usually Mélodium version itself, e.g. `v0.9.2`).  
+Where `<tag>` is the release tag you want to use (usually Mélodium version itself, e.g. `v0.10.0`).  
 Refer to the workflow file itself to see all available inputs about checkout and artifacts.
 
 ### Mélodium in Github with local distribution
@@ -44,7 +44,7 @@ jobs:
       token: ${{ secrets.token }}
 ```
 
-Where `<tag>` is the release tag you want to use (usually Mélodium version itself, e.g. `v0.9.2`).  
+Where `<tag>` is the release tag you want to use (usually Mélodium version itself, e.g. `v0.10.0`).  
 Refer to the workflow file itself to see all available inputs about checkout and artifacts.
 
 ### Mélodium in Github on Ubuntu
@@ -65,7 +65,7 @@ jobs:
       token: ${{ secrets.token }}
 ```
 
-Where `<tag>` is the release tag you want to use (usually Mélodium version itself, e.g. `v0.9.2`).  
+Where `<tag>` is the release tag you want to use (usually Mélodium version itself, e.g. `v0.10.0`).  
 Refer to the workflow file itself to see all available inputs about checkout and artifacts.
 
 
@@ -87,7 +87,7 @@ jobs:
       token: ${{ secrets.token }}
 ```
 
-Where `<tag>` is the release tag you want to use (usually Mélodium version itself, e.g. `v0.9.2`).  
+Where `<tag>` is the release tag you want to use (usually Mélodium version itself, e.g. `v0.10.0`).  
 Refer to the workflow file itself to see all available inputs about checkout and artifacts.
 
 ### Mélodium in Github on Mac OS
@@ -108,7 +108,7 @@ jobs:
       token: ${{ secrets.token }}
 ```
 
-Where `<tag>` is the release tag you want to use (usually Mélodium version itself, e.g. `v0.9.2`).  
+Where `<tag>` is the release tag you want to use (usually Mélodium version itself, e.g. `v0.10.0`).  
 Refer to the workflow file itself to see all available inputs about checkout and artifacts.
 
 ## Inputs, checkout, and artifacts
