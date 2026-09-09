@@ -24,7 +24,7 @@ jobs:
         melodium-api-token: ${{ secrets.MELODIUM_API_TOKEN }}
 ```
 
-Where `<tag>` is the release tag you want to use (usually Mélodium version itself, e.g. `v0.10.0`).  
+Where `<tag>` is the release tag you want to use (usually Mélodium version itself, e.g. `v0.10.3`).  
 Refer to the workflow file itself to see all available inputs about checkout and artifacts.
 
 ### Mélodium in Github with local distribution
@@ -122,7 +122,7 @@ There are some optional inputs, please refer to the workflow file itself to see 
 
 | Input      | Default value    | Description |
 |------------|------------------|-------------|
-| `version`  | `0.10.2`    | The Mélodium version to use (should usually be the same as the component). |
+| `version`  | `0.10.3`    | The Mélodium version to use (should usually be the same as the component). |
 | `edition`  | `alpine`         | The Mélodium edition to use (_available only for pure Mélodium `melodium.yml`_). |
 | `command`  | `run Compo.toml` | The Mélodium command to run. |
 | `repository`  | `${{ github.repository }}` | Repository name with owner. For example, actions/checkout' |
