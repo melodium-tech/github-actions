@@ -1,4 +1,4 @@
-name: Mélodium on Mac OS Workflow
+name: Mélodium on Ubuntu Workflow
 
 on:
   workflow_call:
@@ -11,7 +11,7 @@ on:
       version:
         type: string
         required: false
-        default: 0.10.4
+        default: 0.11.0
         description: 'The Mélodium version to use (should usually be the same as the workflow)'
       melodium_group_id:
         type: string
@@ -191,30 +191,45 @@ on:
 
 
           [Learn more about creating and using encrypted secrets](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets)
+
+
+          Also given to the program as `MELODIUM_SECRET_GITHUB_TOKEN` environment variable,
+          the default status token of `cicd` steps (`env:MELODIUM_SECRET_GITHUB_TOKEN` locator).
       melodium-api-token:
         required: false
         description: >
-          Mélodium API Token
+          Mélodium API Token, given as `MELODIUM_API_TOKEN` environment variable,
+          used by Mélodium for reporting and work distribution.
       secret-1:
         required: false
+        description: 'Given to the program as `MELODIUM_SECRET_1` environment variable, read with the `env:MELODIUM_SECRET_1` locator'
       secret-2:
         required: false
+        description: 'Given to the program as `MELODIUM_SECRET_2` environment variable, read with the `env:MELODIUM_SECRET_2` locator'
       secret-3:
         required: false
+        description: 'Given to the program as `MELODIUM_SECRET_3` environment variable, read with the `env:MELODIUM_SECRET_3` locator'
       secret-4:
         required: false
+        description: 'Given to the program as `MELODIUM_SECRET_4` environment variable, read with the `env:MELODIUM_SECRET_4` locator'
       secret-5:
         required: false
+        description: 'Given to the program as `MELODIUM_SECRET_5` environment variable, read with the `env:MELODIUM_SECRET_5` locator'
       secret-6:
         required: false
+        description: 'Given to the program as `MELODIUM_SECRET_6` environment variable, read with the `env:MELODIUM_SECRET_6` locator'
       secret-7:
         required: false
+        description: 'Given to the program as `MELODIUM_SECRET_7` environment variable, read with the `env:MELODIUM_SECRET_7` locator'
       secret-8:
         required: false
+        description: 'Given to the program as `MELODIUM_SECRET_8` environment variable, read with the `env:MELODIUM_SECRET_8` locator'
       secret-9:
         required: false
+        description: 'Given to the program as `MELODIUM_SECRET_9` environment variable, read with the `env:MELODIUM_SECRET_9` locator'
       secret-10:
         required: false
+        description: 'Given to the program as `MELODIUM_SECRET_10` environment variable, read with the `env:MELODIUM_SECRET_10` locator'
 
 jobs:
   melodium:
@@ -247,21 +262,23 @@ jobs:
           lfs: ${{ inputs.lfs }}
           submodules: ${{ inputs.submodules }}
       - name: Run Mélodium
-        run: melodium ${{ inputs.command }}
+        run: |
+          if [ -n "${ACTIONS_ID_TOKEN_REQUEST_TOKEN:-}" ]; then export MELODIUM_SECRET_ACTIONS_ID_TOKEN_REQUEST_TOKEN="$ACTIONS_ID_TOKEN_REQUEST_TOKEN"; fi
+          melodium ${{ inputs.command }}
         env:
-          GITHUB_TOKEN: ${{ secrets.token }}
+          MELODIUM_SECRET_GITHUB_TOKEN: ${{ secrets.github-token }}
           MELODIUM_API_TOKEN: ${{ secrets.melodium-api-token }}
           MELODIUM_GROUP_ID: ${{ inputs.melodium_group_id }}
-          SECRET_1: ${{ secrets.secret-1 }}
-          SECRET_2: ${{ secrets.secret-2 }}
-          SECRET_3: ${{ secrets.secret-3 }}
-          SECRET_4: ${{ secrets.secret-4 }}
-          SECRET_5: ${{ secrets.secret-5 }}
-          SECRET_6: ${{ secrets.secret-6 }}
-          SECRET_7: ${{ secrets.secret-7 }}
-          SECRET_8: ${{ secrets.secret-8 }}
-          SECRET_9: ${{ secrets.secret-9 }}
-          SECRET_10: ${{ secrets.secret-10 }}
+          MELODIUM_SECRET_1: ${{ secrets.secret-1 }}
+          MELODIUM_SECRET_2: ${{ secrets.secret-2 }}
+          MELODIUM_SECRET_3: ${{ secrets.secret-3 }}
+          MELODIUM_SECRET_4: ${{ secrets.secret-4 }}
+          MELODIUM_SECRET_5: ${{ secrets.secret-5 }}
+          MELODIUM_SECRET_6: ${{ secrets.secret-6 }}
+          MELODIUM_SECRET_7: ${{ secrets.secret-7 }}
+          MELODIUM_SECRET_8: ${{ secrets.secret-8 }}
+          MELODIUM_SECRET_9: ${{ secrets.secret-9 }}
+          MELODIUM_SECRET_10: ${{ secrets.secret-10 }}
       - name: Artifacts
         uses: actions/upload-artifact@v4
         with:
