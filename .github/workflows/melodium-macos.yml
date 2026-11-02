@@ -17,6 +17,14 @@ on:
         type: string
         required: false
         description: 'Group identifier (UUID) the run is part of'
+      environment:
+        type: string
+        required: false
+        default: ''
+        description: >
+          GitHub environment of the job, none when empty. Give the environment whose secret
+          `MELODIUM_CACHE_SCOPE` holds the cache scope token, on protected branches only, with an
+          expression such as `github.ref == 'refs/heads/main' && 'protected' || ''`.
 
       repository:
         type: string
@@ -200,6 +208,12 @@ on:
         description: >
           Mélodium API Token, given as `MELODIUM_API_TOKEN` environment variable,
           used by Mélodium for reporting and work distribution.
+      MELODIUM_CACHE_SCOPE:
+        required: false
+        description: >
+          Cache scope token (`cad_cs_`), given as `MELODIUM_CACHE_SCOPE` environment variable,
+          read by Mélodium only. Keep it as a secret of the environment given with `environment`,
+          limited to protected branches: GitHub uses the environment's secret of this name.
       secret-1:
         required: false
         description: 'Given to the program as `MELODIUM_SECRET_1` environment variable, read with the `env:MELODIUM_SECRET_1` locator'
@@ -234,6 +248,7 @@ on:
 jobs:
   melodium:
     runs-on: macos-latest
+    environment: ${{ inputs.environment }}
     steps:
       - name: Setup Mélodium
         run: |
@@ -269,6 +284,7 @@ jobs:
           MELODIUM_SECRET_GITHUB_TOKEN: ${{ secrets.github-token }}
           MELODIUM_API_TOKEN: ${{ secrets.melodium-api-token }}
           MELODIUM_GROUP_ID: ${{ inputs.melodium_group_id }}
+          MELODIUM_CACHE_SCOPE: ${{ secrets.MELODIUM_CACHE_SCOPE }}
           MELODIUM_SECRET_1: ${{ secrets.secret-1 }}
           MELODIUM_SECRET_2: ${{ secrets.secret-2 }}
           MELODIUM_SECRET_3: ${{ secrets.secret-3 }}

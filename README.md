@@ -128,6 +128,7 @@ There are some optional inputs, please refer to the workflow file itself to see 
 | `repository`  | `${{ github.repository }}` | Repository name with owner. For example, actions/checkout' |
 | `ref`  | _default branch_ | The branch, tag or SHA to checkout. |
 | `artifact-path`  | `''`| Path to artifact to upload. |
+| `environment`  | _none_ | GitHub environment of the job, such as the one holding the [cache scope](#cache-scopes) token. |
 | `melodium-api-token`  | _none_ | _Secret_ The Mélodium API token for reporting and work distribution, see service like [Cadence.CI](https://cadence.ci). |
 | `github-token`  | _required_ | _Secret_ The token used to checkout the repository, also given to the program as `MELODIUM_SECRET_GITHUB_TOKEN`. |
 | `secret-1` to `secret-10`  | _none_ | _Secret_ Given to the program as `MELODIUM_SECRET_1` to `MELODIUM_SECRET_10`. |
@@ -149,6 +150,7 @@ Programs only read the environment variables whose name starts with `MELODIUM_SE
 | `github-token` | `MELODIUM_SECRET_GITHUB_TOKEN` | `env:MELODIUM_SECRET_GITHUB_TOKEN`, default status token of `cicd` steps |
 | `secret-1` to `secret-10` | `MELODIUM_SECRET_1` to `MELODIUM_SECRET_10` | `env:MELODIUM_SECRET_1` to `env:MELODIUM_SECRET_10` |
 | `melodium-api-token` | `MELODIUM_API_TOKEN` | _none_, read by Mélodium itself |
+| `MELODIUM_CACHE_SCOPE` | `MELODIUM_CACHE_SCOPE` | _none_, read by Mélodium itself (see [Cache scopes](#cache-scopes)) |
 
 For example, to give a token stored as `NPM_TOKEN` in the repository secrets to a `npm_token: Secret<string>` parameter:
 
@@ -182,6 +184,28 @@ jobs:
     uses: melodium-tech/github-actions/.github/workflows/melodium.yml@<tag>
     ...
 ```
+
+## Cache scopes
+
+Caches saved by runs on Cadence.CI are shared by every run of the organization, unless a run is requested with a cache scope token (`cad_cs_...`, created on the _Storage_ page of Cadence.CI): it then reads and writes the caches of that scope only. Give the token to protected branches only, so that a pull request never writes a cache the default branch then builds with.
+
+Repository secrets are not enough for this: a branch pushed by any collaborator can change its workflow and read them. Environment secrets are:
+
+1. In _Settings > Environments_, create an environment, such as `protected`, whose _Deployment branches and tags_ are your protected branches only.
+2. Add to it a secret named `MELODIUM_CACHE_SCOPE` holding the token. Environment secret names cannot hold `-`, hence a name unlike the other secrets of the workflows.
+3. Give the environment with the `environment` input, on those branches only. Other branches run without environment, and use the default caches of the organization:
+   ```yaml
+   jobs:
+     melodium:
+       uses: melodium-tech/github-actions/.github/workflows/melodium.yml@<tag>
+       with:
+         environment: ${{ github.ref == 'refs/heads/main' && 'protected' || '' }}
+       secrets:
+         github-token: ${{ secrets.GITHUB_TOKEN }}
+         melodium-api-token: ${{ secrets.MELODIUM_API_TOKEN }}
+   ```
+
+GitHub gives the job the environment's `MELODIUM_CACHE_SCOPE`, and Mélodium sends it with the run it requests. Programs never see the token, they only name caches: the same program runs on every branch. It needs a Mélodium version sending the scope in run requests (melodium/melodium#169); older versions ignore it and use the default caches. See [Caches](https://cadence.ci/en/docs/how-it-works/caches#cache-scopes) in the Cadence.CI documentation.
 
 ## Migrating from 0.10
 
