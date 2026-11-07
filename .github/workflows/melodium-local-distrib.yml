@@ -16,7 +16,7 @@ on:
       version:
         type: string
         required: false
-        default: 0.11.0
+        default: 0.11.1
         description: 'The Mélodium version to use (should usually be the same as the workflow)'
       melodium_group_id:
         type: string
@@ -138,7 +138,8 @@ on:
       artifact-path:
         type: string
         description: '_From actions/upload-artifact@v4_ A file, directory or wildcard pattern that describes what to upload'
-        required: true
+        required: false
+        default: ''
       artifact-if-no-files-found:
         type: string
         description: >
@@ -287,6 +288,7 @@ jobs:
           if [ -n "${ACTIONS_ID_TOKEN_REQUEST_TOKEN:-}" ]; then export MELODIUM_SECRET_ACTIONS_ID_TOKEN_REQUEST_TOKEN="$ACTIONS_ID_TOKEN_REQUEST_TOKEN"; fi
           melodium ${{ inputs.command }}
       - name: Artifacts
+        if: ${{ inputs.artifact-path != '' }}
         uses: actions/upload-artifact@v4
         with:
           name: ${{ inputs.artifact-name }}

@@ -15,6 +15,9 @@ project CI/CD configuration:
 ```yaml
 jobs:
   melodium:
+    permissions:
+      contents: read
+      statuses: write
     uses: melodium-tech/github-actions/.github/workflows/melodium.yml@<tag>
     with:
       command: run --api-report .melodium-ci/Compo.toml
@@ -24,7 +27,7 @@ jobs:
       melodium-api-token: ${{ secrets.MELODIUM_API_TOKEN }}
 ```
 
-Where `<tag>` is the release tag you want to use (usually Mélodium version itself, e.g. `v0.11.0`).  
+Where `<tag>` is the release tag you want to use (usually Mélodium version itself, e.g. `v0.11.1`).  
 Refer to the workflow file itself to see all available inputs about checkout and artifacts.
 
 ### Mélodium in Github with local distribution
@@ -37,6 +40,9 @@ project CI/CD configuration:
 ```yaml
 jobs:
   melodium:
+    permissions:
+      contents: read
+      statuses: write
     uses: melodium-tech/github-actions/.github/workflows/melodium-local-distrib.yml@<tag>
     with:
       command: run --api-report .melodium-ci/Compo.toml
@@ -46,7 +52,7 @@ jobs:
       melodium-api-token: ${{ secrets.MELODIUM_API_TOKEN }}
 ```
 
-Where `<tag>` is the release tag you want to use (usually Mélodium version itself, e.g. `v0.11.0`).  
+Where `<tag>` is the release tag you want to use (usually Mélodium version itself, e.g. `v0.11.1`).  
 Refer to the workflow file itself to see all available inputs about checkout and artifacts.
 
 ### Mélodium in Github on Ubuntu
@@ -59,6 +65,9 @@ project CI/CD configuration:
 ```yaml
 jobs:
   melodium:
+    permissions:
+      contents: read
+      statuses: write
     uses: melodium-tech/github-actions/.github/workflows/melodium-ubuntu.yml@<tag>
     with:
       command: run --api-report .melodium-ci/Compo.toml
@@ -68,7 +77,7 @@ jobs:
       melodium-api-token: ${{ secrets.MELODIUM_API_TOKEN }}
 ```
 
-Where `<tag>` is the release tag you want to use (usually Mélodium version itself, e.g. `v0.11.0`).  
+Where `<tag>` is the release tag you want to use (usually Mélodium version itself, e.g. `v0.11.1`).  
 Refer to the workflow file itself to see all available inputs about checkout and artifacts.
 
 
@@ -82,6 +91,9 @@ project CI/CD configuration:
 ```yaml
 jobs:
   melodium:
+    permissions:
+      contents: read
+      statuses: write
     uses: melodium-tech/github-actions/.github/workflows/melodium-windows.yml@<tag>
     with:
       command: run --api-report .melodium-ci/Compo.toml
@@ -91,7 +103,7 @@ jobs:
       melodium-api-token: ${{ secrets.MELODIUM_API_TOKEN }}
 ```
 
-Where `<tag>` is the release tag you want to use (usually Mélodium version itself, e.g. `v0.11.0`).  
+Where `<tag>` is the release tag you want to use (usually Mélodium version itself, e.g. `v0.11.1`).  
 Refer to the workflow file itself to see all available inputs about checkout and artifacts.
 
 ### Mélodium in Github on Mac OS
@@ -104,6 +116,9 @@ project CI/CD configuration:
 ```yaml
 jobs:
   melodium:
+    permissions:
+      contents: read
+      statuses: write
     uses: melodium-tech/github-actions/.github/workflows/melodium-macos.yml@<tag>
     with:
       command: run --api-report .melodium-ci/Compo.toml
@@ -113,7 +128,7 @@ jobs:
       melodium-api-token: ${{ secrets.MELODIUM_API_TOKEN }}
 ```
 
-Where `<tag>` is the release tag you want to use (usually Mélodium version itself, e.g. `v0.11.0`).  
+Where `<tag>` is the release tag you want to use (usually Mélodium version itself, e.g. `v0.11.1`).  
 Refer to the workflow file itself to see all available inputs about checkout and artifacts.
 
 ## Inputs, checkout, and artifacts
@@ -122,15 +137,23 @@ There are some optional inputs, please refer to the workflow file itself to see 
 
 | Input      | Default value    | Description |
 |------------|------------------|-------------|
-| `version`  | `0.11.0`    | The Mélodium version to use (should usually be the same as the component). |
-| `edition`  | `alpine`         | The Mélodium edition to use (_available only for pure Mélodium `melodium.yml`_). |
+| `version`  | `0.11.1`    | The Mélodium version to use (should usually be the same as the component). |
+| `edition`  | `alpine`         | The Mélodium edition to use (_used only by the container-based `melodium.yml`_). |
 | `command`  | `run Compo.toml` | The Mélodium command to run. |
 | `repository`  | `${{ github.repository }}` | Repository name with owner. For example, actions/checkout' |
 | `ref`  | _default branch_ | The branch, tag or SHA to checkout. |
-| `artifact-path`  | `''`| Path to artifact to upload. |
+| `artifact-path`  | `''`| Path to artifact to upload, nothing is uploaded when empty. |
 | `melodium-api-token`  | _none_ | _Secret_ The Mélodium API token for reporting and work distribution, see service like [Cadence.CI](https://cadence.ci). |
 | `github-token`  | _required_ | _Secret_ The token used to checkout the repository, also given to the program as `MELODIUM_SECRET_GITHUB_TOKEN`. |
 | `secret-1` to `secret-10`  | _none_ | _Secret_ Given to the program as `MELODIUM_SECRET_1` to `MELODIUM_SECRET_10`. |
+
+## Permissions
+
+The calling job needs `contents: read` to checkout the repository, and `statuses: write` for `cicd` steps to report commit statuses with `github-token`. Add `id-token: write` only for [Vault with GitHub OIDC](#vault-with-github-oidc).
+
+## Caches and artifacts of api.melodium.tech
+
+The `cache` and `artifacts` of `cicd` steps (Mélodium 0.11.1) talk to api.melodium.tech with the token of the run, which only workers started by api.melodium.tech have. On a GitHub runner they only log a warning and the job goes on: use `actions/cache` and the `artifact-*` inputs of these workflows there, or run the steps on api.melodium.tech workers.
 
 ## Secrets
 
