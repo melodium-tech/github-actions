@@ -143,7 +143,7 @@ There are some optional inputs, please refer to the workflow file itself to see 
 | `repository`  | `${{ github.repository }}` | Repository name with owner. For example, actions/checkout' |
 | `ref`  | _default branch_ | The branch, tag or SHA to checkout. |
 | `artifact-path`  | `''`| Path to artifact to upload, nothing is uploaded when empty. |
-| `melodium-api-token`  | _none_ | _Secret_ The Mélodium API token for reporting and work distribution, see service like [Cadence.CI](https://cadence.ci). |
+| `melodium-api-token`  | _none_ | _Secret_ The Mélodium API token for reporting and work distribution, see service like [Cadence.CI](https://cadence.ci), which gives it as a [run token](https://docs.cadence.ci/en/console/keys). |
 | `github-token`  | _required_ | _Secret_ The token used to checkout the repository, also given to the program as `MELODIUM_SECRET_GITHUB_TOKEN`. |
 | `secret-1` to `secret-10`  | _none_ | _Secret_ Given to the program as `MELODIUM_SECRET_1` to `MELODIUM_SECRET_10`. |
 
@@ -220,7 +220,7 @@ See also the [Github Actions migration guide](https://gitlab.com/melodium/melodi
 
 ## Documentation
 
-Take look at [Mélodium CI/CD Module Documentation](https://doc.melodium.tech/latest/en/cicd/index.html) and [Cadence.CI Documentation](https://cadence.ci/en/docs/from-gitlab) for more informations.
+Take a look at the [Mélodium CI/CD Module Documentation](https://doc.melodium.tech/latest/en/cicd/index.html) and the [Cadence.CI Documentation](https://docs.cadence.ci/en/github/run-on-github) for more information.
 
 ## Licence
 
